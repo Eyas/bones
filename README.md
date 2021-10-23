@@ -1,5 +1,7 @@
 # bonesday.today
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ff325ff0-a859-44d5-ba75-2d0fc07b86d8/deploy-status)](https://app.netlify.com/sites/bones-day/deploys)
+
 [bonesday.today](https://bonesday.today/) is an [Astro](https://astro.build/) site that tells you if it's a Bones Day today.
 
 ## Contributing
