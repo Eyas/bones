@@ -1,0 +1,56 @@
+---
+import {BonesDayType, DayData} from '../data/bones.js';
+import {tiktokId} from '../lib/bone-utils.js'
+
+const { day: day_ } = Astro.props;
+const day = day_ as DayData;
+const id = tiktokId(day);
+---
+<section>
+    <header>
+        <div class="date">{day.date.asCommonString()}</div>
+        <div class="forecast">
+        {
+            day.forecast === BonesDayType.BONES ? 'is a Bones Day!'
+            : day.forecast === BonesDayType.NO_BONES ? 'is a No Bones Day'
+            : "We're not sure..."
+        }
+        </div>
+    </header>
+    {day.forecast === BonesDayType.INDETERMINATE && <div class="indeterminate">
+        {day.closestDeterminateType === BonesDayType.BONES ? "... but it's probably a bones day" : "... but it's likely not a bones day"}
+    </div>}
+    {id && <iframe src={`https://www.tiktok.com/embed/v2/${id}?lang=en-US`}></iframe>}
+</section>
+
+<style>
+section {
+    margin-top: 5rem;
+    text-align: center;
+}
+
+section .date {
+    font-size: 2em;
+    font-weight: normal;
+}
+
+section .forecast {
+    margin-top: 1rem;
+    font-size: 2em;
+    font-weight: 900;
+}
+
+section .indeterminate {
+    margin-top: 1rem;
+    font-size: 1.5em;
+    font-weight: normal;
+}
+
+iframe {
+    width: 350px; height: 768px; display: block; visibility: unset;
+    border: none;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>
