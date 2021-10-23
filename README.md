@@ -1,42 +1,17 @@
-# Welcome to [Astro](https://astro.build)
+# bonesday.today
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/snowpackjs/astro/tree/latest/examples/starter)
+[bonesday.today](https://bonesday.today/) is an [Astro](https://astro.build/) site that tells you if it's a Bones Day today.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Contributing
 
-## 🚀 Project Structure
+If I'm missing a forecast, you can simply add a new entry to `./src/data/bones.ts`.
 
-Inside of your Astro project, you'll see the following folders and files:
+A forecast is a plain JS object that looks like this:
 
-```
-/
-├── public/
-│   ├── robots.txt
-│   └── favicon.ico
-├── src/
-│   ├── components/
-│   │   └── Tour.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command         | Action                                      |
-|:----------------|:--------------------------------------------|
-| `npm install`   | Installs dependencies                       |
-| `npm run dev`   | Starts local dev server at `localhost:3000` |
-| `npm run build` | Build your production site to `./dist/`     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://github.com/snowpackjs/astro) or jump into our [Discord server](https://astro.build/chat).
+| Field                      | Type         | Presence                                                | Notes                                     |
+| -------------------------- | ------------ | ------------------------------------------------------- | ----------------------------------------- |
+| date                       | CivilDate    | required                                                | constructed like `new CivilDate(y, m, d)` |
+| cite                       | string       | optional, but strongly recommended                      | TikTok URL showing Noodle on that day.    |
+| forecast                   | BonesDayType | required                                                | `BONES`, `NO_BONES`, or `INDETERMINATE`   |
+| closestDeterminateForecast | BonesDayType | **Only present** when the `forecast` is `INDETERMINATE` | Can be `BONES` or `NO_BONES` only.        |
+| message                    | string       | optional                                                |                                           |
