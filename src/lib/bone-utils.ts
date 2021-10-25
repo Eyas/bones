@@ -30,3 +30,24 @@ export function tiktokId(day: DayData): string | undefined {
 
     return m && m[1];
 }
+
+interface DayDataJson {
+    date: string
+    cite: string | null
+    message: string | null
+    forecast: number,
+    closestDeterminateForecast?: number,
+}
+export function asJson(day: DayData): object {
+    const json: DayDataJson = {
+        date: day.date.asIsoString(),
+        cite: day.cite,
+        message: day.message || null,
+        forecast: day.forecast,
+    };
+    if ("closestDeterminateForecast" in day) {
+        json.closestDeterminateForecast = day.closestDeterminateForecast;
+    }
+
+    return json;
+}

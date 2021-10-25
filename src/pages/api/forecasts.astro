@@ -1,5 +1,10 @@
 ---
 import {bones} from '../../data/bones.js'
-const data = bones;
+import {asJson} from '../../lib/bone-utils.js'
+
+const data = {
+    ...bones,
+    allTime: allTime.map(asJson)
+};
 ---
 {JSON.stringify(data)}
