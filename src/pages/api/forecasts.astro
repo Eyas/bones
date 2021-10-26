@@ -4,7 +4,7 @@ import {asJson} from '../../lib/bone-utils.js'
 
 const data = {
     ...bones,
-    allTime: allTime.map(asJson)
+    allTime: bones.allTime.map(asJson)
 };
 ---
 {JSON.stringify(data)}
