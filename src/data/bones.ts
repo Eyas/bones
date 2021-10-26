@@ -34,6 +34,11 @@ export type Data = {
 
 const allTime: DayData[] = a(
   {
+    date: new CivilDate(2021, 10, 26),
+    forecast: BonesDayType.NO_BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7023371588124921093",
+  },
+  {
     date: new CivilDate(2021, 10, 25),
     forecast: BonesDayType.BONES,
     cite: "https://www.tiktok.com/@jongraz/video/7023004798215539973",
