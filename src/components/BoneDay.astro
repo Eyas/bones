@@ -1,5 +1,5 @@
 ---
-import {BonesDayType, DayData} from '../data/bones.js';
+import {BonesDayType, DayData} from '../lib/bones.js';
 import {tiktokId} from '../lib/bone-utils.js'
 
 const { day: day_ } = Astro.props;
@@ -18,7 +18,7 @@ const id = tiktokId(day);
         </div>
     </header>
     {day.forecast === BonesDayType.INDETERMINATE && <div class="indeterminate">
-        {day.closestDeterminateType === BonesDayType.BONES ? "... but it's probably a bones day" : "... but it's likely not a bones day"}
+        {day.closestDeterminateForecast === BonesDayType.BONES ? "... but it's probably a bones day" : "... but it's likely not a bones day"}
     </div>}
     {id && <iframe src={`https://www.tiktok.com/embed/v2/${id}?lang=en-US`}></iframe>}
 </section>
