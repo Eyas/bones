@@ -13,7 +13,7 @@ export class Calendar {
         while (cur.before(to)) {
             if (cur.y != cYear.year) {
                 cYear = {
-                    yeaR: cur.y,
+                    year: cur.y,
                     months: []
                 };
             }
@@ -52,7 +52,7 @@ export interface Year {
 export interface Month {
     readonly month: number;
     readonly days: CivilDate[];
-    readonly firstStartsOn: 1 | 2 | 3 | 4 | 5 | 6 | 7;
+    readonly firstStartsOn: 0 | 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 function daysInMonth(month: number, year: number): number {
@@ -70,7 +70,7 @@ function daysInMonth(month: number, year: number): number {
  * 
  * Sunday = 0, Saturday = 6.
  */
-function dayOfWeek(date: CivilDate) {
+function dayOfWeek(date: CivilDate): 0 | 1 | 2 | 3 | 4 | 5 | 6 {
     const YY = date.y % 100;
     const yearRem = date.y % 4;
     const yearDiv = Math.floor(YY / 4);
@@ -81,7 +81,7 @@ function dayOfWeek(date: CivilDate) {
         + YY;
     
     const remainder = magic % 7;
-    return remainder;
+    return remainder as 0 | 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 function leapYear(year: number): boolean {
