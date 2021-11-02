@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/base.astro'
+
+import {bones} from '../data/bones.js'
+import {shortDesc} from '../lib/bone-utils.js'
+
+let title = 'All Forecasts | Bones.Today';
+
+---
+<BaseLayout title={title}>
+    <nav><a href="/">Back to home</a>.</nav>
+    <main>
+        <h1>Forecast List</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Forecast</th>
+                <th>Citation</th>
+                <th>Notes</th>
+            </tr>
+            </thead>
+            <tbody>
+            {
+                bones.allTime.map(day => <tr>
+                <td>{day.date.asIsoString()}</td>
+                <td>{shortDesc(day)}</td>
+                <td>[<a href={day.cite}>source</a>]</td>
+                <td>{day.message}</td>
+                </tr>)
+            }
+            </tbody>
+        </table>
+
+    </main>
+</BaseLayout>

@@ -1,36 +1,26 @@
 ---
+import BaseLayout from '../layouts/base.astro'
+
 import {bones} from '../data/bones.js'
 import {findToday, shortDesc} from '../lib/bone-utils.js'
+import {Calendar} from '../lib/calendar.js';
+import {CivilDate} from '../lib/civil-date.js';
+import {DayData} from '../lib/bones.js'
 import BoneDay from '../components/BoneDay.astro'
+import Year from '../components/Year.astro'
 
 
 let title = 'Is it a Bones Day?';
 const data = bones;
 const recent = findToday(data.allTime);
+
+const today = CivilDate.today();
+const oldest = bones.allTime[bones.allTime.length - 1].date;
+const calendar = new Calendar(oldest, today);
+
+const forecastMap = new Map<string, DayData>(bones.allTime.map(d => [d.date.asIsoString(), d] as const));
 ---
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    <title>{title}</title>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4437275937930711"
-        crossorigin="anonymous"></script>
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/style/global.css">
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@eyassh" />
-    <meta name="twitter:title" content=${title} />
-    <meta name="twitter:description" content="Is today a Bones Day? Check the latest forecast to find out!" />
-    <meta name="og:image" content="https://bonesday.today/assets/bones.png" />
-    <meta name="og:image:width" content="930" />
-    <meta name="og:image:height" content="517" />
-    <meta name="og:url" content="https://bonesday.today" />
-    <link rel="canonical" href="https://bonesday.today" />
-</head>
-<body>
+<BaseLayout title={title}>
     <main>
         <header>
             <h1>Is today a Bones Day?</h1>
@@ -46,23 +36,19 @@ const recent = findToday(data.allTime);
 
     </main>
     <aside>
-        <h2>Recent Forecasts</h2>
+        <h2>Recent Forecasts (<a href="/list">list</a>)</h2>
         <div class='forecasts'>
         {
-            data.allTime.map(day => <div>
+            data.allTime.slice(0, 7).map(day => <div>
             <span>{day.date.asIsoString()}</span><span>{shortDesc(day)}</span>
             </div>)
         }
         </div>
     </aside>
-    <footer>
-        <p>
-            <a href="./api/forecasts">Prefer JSON</a>?
-        </p>
-        <p>
-            Made by <a href="https://eyas.sh/">Eyas</a>.
-            <a href="https://github.com/Eyas/bones">Fork me on GitHub</a>.
-        </p>
-    </footer>
-</body>
-</html>
+    <aside>
+        <h2><a href="/calendar">Calendar</a></h2>
+        {
+            calendar.getRecent().map(year => <Year year={year} forecasts={forecastMap} />)
+        }
+    </aside>
+</BaseLayout>

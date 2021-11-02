@@ -1,0 +1,49 @@
+---
+import {DayData} from '../lib/bones.js';
+import {Year} from '../lib/calendar.js';
+import Month from '../components/Month.astro'
+
+const { year: year_, forecasts: forecasts_ } = Astro.props;
+const year = year_ as Year;
+const forecasts = forecasts_ as Map<string, DayData>;
+
+---
+<h3>{year.year}</h3>
+<div class="year">
+{
+    year.months.map(month => <Month class="m" month={month} forecasts={forecasts} />)
+}
+</div>
+<style>
+.year {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+.m {
+    flex-shrink: 0;
+    flex-grow: 0;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 50rem) {
+    .year {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        width: 90vw;
+    }
+
+    .m {
+        margin-right: 1rem;
+        margin-bottom: 0;
+    }
+}
+
+@media screen and (max-width: 40rem) {
+    .year {
+        width: 80vw;
+    }
+}
+</style>

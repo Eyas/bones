@@ -1,0 +1,86 @@
+---
+import {DayData, BonesDayType} from '../lib/bones.js';
+import {Month} from '../lib/calendar.js';
+import {paginate} from '../lib/paginate.js';
+
+const { month: month_, forecasts: forecasts_, class: className } = Astro.props;
+const month = month_ as Month;
+const forecasts = forecasts_ as Map<string, DayData>;
+
+const monthName = [null, 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][month.month];
+if (monthName === null) throw new Error(`Unkjnown month: ${month.month}`);
+
+const MAX_ROWS_IN_MONTH = 6;
+
+const days = Array(MAX_ROWS_IN_MONTH * 7).fill(undefined).map((_, i) => {
+    if (i < month.firstStartsOn) return 'EMPTY' as const;
+    const dayIdx = i - month.firstStartsOn;
+    if (dayIdx >= month.daysInMonth) return 'EMPTY' as const;
+    const day = month.days[dayIdx];
+    if (!day) throw new Error(`Day ${dayIdx} is undefined (=${i} - ${month.firstStartsOn}). Month: ${JSON.stringify(month)}`);
+
+    const forecast = forecasts.get(day.asIsoString());
+    if (!forecast) {
+        return [day.d, ''] as const;
+    }
+
+    if (forecast.forecast === BonesDayType.BONES) {
+        return [day.d, '🦴'] as const;
+    } else if (forecast.forecast === BonesDayType.INDETERMINATE) {
+        return [day.d, '❔'] as const;
+    } else {
+        return [day.d, '🚫'] as const;
+    }
+});
+
+const weeks = paginate(days, 7);
+
+---
+<div class={className}>
+<h4>{monthName}</h4>
+<table>
+    <thead>
+        <tr>
+            <th>S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th>
+        </tr>
+    </thead>
+    <tbody>
+        {
+            weeks.map(week => <tr>{
+                week.map(day => {
+                    if (day === 'EMPTY') {
+                        return <td></td>;
+                    } else {
+                        return <td>{day[0]}<span class='verdict'>{day[1] || '&nbsp;'}</span></td>;
+                    }
+                })
+            }</tr>)
+        }
+    </tbody>
+</table>
+</div>
+
+<style>
+span.verdict {
+    display: block;
+    font-size: 0.6em;
+}
+
+table td {
+    background-color: #eee;
+    padding: 2px;
+    text-align: center;
+    height: 3em;
+    width: 3em;
+}
+
+@media screen and (max-width: 40rem) {
+    table {
+        font-size: 0.7em;
+    }
+    table td {
+        width: 2.75em;
+    }
+}
+
+</style>

@@ -44,6 +44,25 @@ export class Calendar {
     getCalendar(): readonly Year[] {
         return this.years;
     }
+
+    getRecent(): readonly Year[] {
+        const years = this.years.slice().reverse();
+        if (years[0].months.length >= 4) return [{
+            year: years[0].year,
+            months: years[0].months.slice().reverse().slice(0, 4)
+        }];
+
+        return [
+            {
+                year: years[0].year,
+                months: years[0].months.slice().reverse()
+            },
+            {
+                year: years[1].year,
+                months: years[1].months.slice().reverse().slice(0, 4)
+            }
+        ]
+    }
 }
 
 export interface Year {

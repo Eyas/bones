@@ -41,6 +41,7 @@ body {
 
 .forecasts > div {
   flex-basis: 10rem;
+  flex-shrink: 0;
   height: 6rem;
 }
 
@@ -51,4 +52,28 @@ body {
 .forecasts > div > span:first-child {
   font-size: 1.1em;
   font-weight: bold;
+}
+
+@media screen and (max-width: 40rem) {
+  .forecasts {
+    overflow-y: auto;
+    flex-wrap: nowrap;
+    width: 80vw;
+  }
+
+  .forecasts > div {
+    flex-basis: 8rem;
+    height: 4rem;
+  }
+}
+
+a:link {
+  color: #111827;
+}
+a:visited {
+  color: hsl(221, 59%, 31%);
+}
+a:active,
+a:hover {
+  color: hsl(221, 39%, 51%);
 }

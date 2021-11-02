@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/base.astro'
+
+import {bones} from '../data/bones.js'
+import {Calendar} from '../lib/calendar.js';
+import {CivilDate} from '../lib/civil-date.js';
+import {DayData} from '../lib/bones.js'
+import Year from '../components/Year.astro'
+
+
+let title = 'Calendar | Bones.Today';
+
+const today = CivilDate.today();
+const oldest = bones.allTime[bones.allTime.length - 1].date;
+const calendar = new Calendar(oldest, today);
+
+const forecastMap = new Map<string, DayData>(bones.allTime.map(d => [d.date.asIsoString(), d] as const));
+---
+<BaseLayout title={title}>
+    <nav><a href="/">Back to home</a>.</nav>
+    <main>
+        <h1>Calendar</h1>
+        {
+            calendar.getCalendar().map(year => <Year year={year} forecasts={forecastMap} />)
+        }
+    </main>
+</BaseLayout>

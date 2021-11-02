@@ -1,0 +1,38 @@
+---
+const {title} = Astro.props;
+---
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>{title}</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4437275937930711"
+        crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/style/global.css">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@eyassh" />
+    <meta name="twitter:title" content=${title} />
+    <meta name="twitter:description" content="Is today a Bones Day? Check the latest forecast to find out!" />
+    <meta name="og:image" content="https://bonesday.today/assets/bones.png" />
+    <meta name="og:image:width" content="930" />
+    <meta name="og:image:height" content="517" />
+    <meta name="og:url" content={Astro.request.canonicalURL} />
+    <link rel="canonical" href={Astro.request.canonicalURL} />
+</head>
+<body>
+    <slot/>
+    <footer>
+        <p>
+            <a href="./api/forecasts">Prefer JSON</a>?
+        </p>
+        <p>
+            Made by <a href="https://eyas.sh/">Eyas</a>.
+            <a href="https://github.com/Eyas/bones">Fork me on GitHub</a>.
+        </p>
+    </footer>
+</body>
+</html>
