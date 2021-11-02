@@ -1,4 +1,4 @@
-import { DayData, BonesDayType } from "../data/bones";
+import { BonesDayType, DayData } from "./bones";
 import { CivilDate } from "./civil-date";
 
 export function findToday(days: DayData[]): {today: DayData}|{mostRecent: DayData} {
