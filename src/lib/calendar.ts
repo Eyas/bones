@@ -7,7 +7,7 @@ export class Calendar {
         this.years = [];
 
         let cYear: Year = {year: -1, months: []};
-        let cMonth: Month = { month: -1, days: [], firstStartsOn: 1};
+        let cMonth: Month = { month: -1, days: [], firstStartsOn: 1, daysInMonth: 28};
 
         let cur = from;
         while (cur.before(to)) {
@@ -22,14 +22,14 @@ export class Calendar {
                     month: cur.m,
                     days: [],
                     firstStartsOn: dayOfWeek(new CivilDate(cur.y, cur.m, 1)),
+                    daysInMonth: daysInMonth(cur.m, cur.y),
                 };
                 cYear.months.push(cMonth);
             }
             cMonth.days.push(cur);
 
             // Increment by 1 day
-            const daysThisMonth = daysInMonth(cur.m, cur.y);
-            if (cur.d < daysThisMonth) {
+            if (cur.d < cMonth.daysInMonth) {
                 cur = new CivilDate(cur.y, cur.m, cur.d + 1);
             } else if (cur.m < 12) {
                 cur = new CivilDate(cur.y, cur.m + 1, 1);
@@ -53,14 +53,15 @@ export interface Month {
     readonly month: number;
     readonly days: CivilDate[];
     readonly firstStartsOn: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+    readonly daysInMonth: 28|29|30|31;
 }
 
-function daysInMonth(month: number, year: number): number {
+function daysInMonth(month: number, year: number): 28|29|30|31 {
     if (month == 2) {
         return leapYear(year) ? 29 : 28;
     }
-    //          x    J    F    M   A   M   J   J   A   S   O   N   D
-    const v = [null, 31, null, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month];
+    //           x    J    F    M   A   M   J   J   A   S   O   N   D
+    const v = ([null, 31, null, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] as const)[month];
     if (!v) throw new Error(`Unexpected month ${month}`);
     return v;
 }
@@ -78,6 +79,7 @@ function dayOfWeek(date: CivilDate): 0 | 1 | 2 | 3 | 4 | 5 | 6 {
     const magic = date.d
         + monthMagic[leapYear(date.y) ? "leap" : "normal"][date.m]
         + yearMagic[yearRem]
+        + yearDiv
         + YY;
     
     const remainder = magic % 7;
