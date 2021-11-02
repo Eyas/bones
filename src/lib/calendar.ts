@@ -9,13 +9,15 @@ export class Calendar {
         let cYear: Year = {year: -1, months: []};
         let cMonth: Month = { month: -1, days: [], firstStartsOn: 1, daysInMonth: 28};
 
-        let cur = from;
-        while (cur.before(to)) {
+        let cur = new CivilDate(from.y, from.m, 1);
+        const until = new CivilDate(to.y, to.m, daysInMonth(to.m, to.y));
+        while (cur.before(until) || cur.equals(until)) {
             if (cur.y != cYear.year) {
                 cYear = {
                     year: cur.y,
                     months: []
                 };
+                this.years.push(cYear);
             }
             if (cur.m != cMonth.month) {
                 cMonth = {
@@ -71,19 +73,24 @@ function daysInMonth(month: number, year: number): 28|29|30|31 {
  * 
  * Sunday = 0, Saturday = 6.
  */
+// 1-1-2021
+// YY = 21
+// yearRem = 1
+// yearDiv = 5.25 -> 6
+//
+// magic = (day: 1) + (magic: 0) + (yearMagic: 4) + (yearDiv: 6) + (yy: 21)
+//       = 32
+// remainder = 31 % 7 = 4
 function dayOfWeek(date: CivilDate): 0 | 1 | 2 | 3 | 4 | 5 | 6 {
-    const YY = date.y % 100;
-    const yearRem = date.y % 4;
-    const yearDiv = Math.floor(YY / 4);
+	// Zeller's congruence
+    const q = date.d;
+    const m = date.m;
+    const K = date.y % 100;
+    const J = Math.floor(date.y / 100);
+    const h = (q + Math.floor((13 * (m + 1)) / 5) + K + Math.floor(K / 4) + Math.floor(J / 4) - 2 * J) % 7;
 
-    const magic = date.d
-        + monthMagic[leapYear(date.y) ? "leap" : "normal"][date.m]
-        + yearMagic[yearRem]
-        + yearDiv
-        + YY;
-    
-    const remainder = magic % 7;
-    return remainder as 0 | 1 | 2 | 3 | 4 | 5 | 6;
+    // In this case, h = 0 -> Saturday. But we want Sunday = 0.
+    return (h + 6) % 7 as 0 | 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 function leapYear(year: number): boolean {
@@ -96,38 +103,4 @@ function leapYear(year: number): boolean {
     } else {
         return true;
     }
-}
-
-const monthMagic = {
-    normal: {
-        1: 0,
-        2: 3,
-        3: 3,
-        4: 6,
-        5: 1,
-        6: 4,
-        7: 6,
-        8: 2,
-        9: 5,
-        10: 0,
-        11: 3,
-        12: 5,
-    }, leap: {
-        1: 6,
-        2: 2,
-        3: 3,
-        4: 6,
-        5: 1,
-        6: 4,
-        7: 6,
-        8: 2,
-        9: 5,
-        10: 0,
-        11: 3,
-        12: 5,
-    }
-} as const;
-
-const yearMagic = {
-    0: 6, 1: 4, 2: 2, 3: 0
 }
