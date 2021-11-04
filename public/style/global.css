@@ -22,13 +22,6 @@ body {
   color: #111827;
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background: #111827;
-    color: #fff;
-  }
-}
-
 .no-recent {
   margin-top: 2rem;
 }
@@ -76,4 +69,22 @@ a:visited {
 a:active,
 a:hover {
   color: hsl(221, 39%, 51%);
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #111827;
+    color: #fff;
+  }
+
+  a:link {
+    color: hsl(221, 39%, 71%);
+  }
+  a:active,
+  a:hover {
+    color: hsl(221, 39%, 61%);
+  }
+  a:visited {
+    color: hsl(221, 59%, 51%);
+  }
 }
