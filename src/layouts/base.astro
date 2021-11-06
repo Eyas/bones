@@ -27,13 +27,33 @@ const {title, description} = Astro.props;
 <body>
     <slot/>
     <footer>
+        <p id="sharing"></p>
         <p>
             <a href="/api/forecasts">Prefer JSON</a>?
         </p>
         <p>
-            Made by <a href="https://eyas.sh/">Eyas</a>.
+            Made by <a href="https://eyas.sh/" rel="publisher">Eyas</a>.
             <a href="https://github.com/Eyas/bones">Fork me on GitHub</a>.
         </p>
     </footer>
+    <script hoist>
+if (navigator.share) {
+    const sharing = document.getElementById('sharing');
+    if (sharing && sharing.childNodes.length == 0) {
+        const shareButton = document.createElement('button');
+        shareButton.className = 'share';
+        shareButton.ariaLabel = 'Share';
+        sharing.appendChild(shareButton);
+        shareButton.addEventListener('click', () => {
+            navigator.share({
+                title: document.title,
+                url: window.location.href
+            })
+                .then(() => console.log('Successful share'))
+                .catch((error) => console.log('Error sharing:', error));
+        });
+    }
+}
+    </script>
 </body>
 </html>

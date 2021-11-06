@@ -71,6 +71,37 @@ a:hover {
   color: hsl(221, 39%, 51%);
 }
 
+#sharing button.share {
+  background-image: url(/assets/share-icon.svg);
+  width: 3rem;
+  height: 3rem;
+  background-size: 1.5rem 1.5rem;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  border-width: 0;
+
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+}
+#sharing button.share:hover {
+  background-color: #f0f0f0;
+}
+#sharing button.share:active {
+  background-color: #d0d0d0
+}
+
+@media (prefers-color-scheme: light) {
+  #sharing button.share {
+    box-shadow:
+      0.5px 1px 1px hsl(0deg 0% 0% / 0.12),
+      1px 2px 2px hsl(0deg 0% 0% / 0.12),
+      1.5px 3px 3px hsl(0deg 0% 0% / 0.12);
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background: #111827;
@@ -86,5 +117,20 @@ a:hover {
   }
   a:visited {
     color: hsl(221, 59%, 51%);
+  }
+
+  #sharing button.share {
+    background-color: #fff;
+    box-shadow:
+      0 0 1px rgba(255, 255, 255, 0.15),
+      0 0 2px rgba(255, 255, 255, 0.20),
+      0 0 4px rgba(255, 255, 255, 0.22),
+      0 0 8px rgba(255, 255, 255, 0.25);
+  }
+  #sharing button.share:hover {
+    background-color: #eee;
+  }
+  #sharing button.share:active {
+    background-color: #ddd
   }
 }
