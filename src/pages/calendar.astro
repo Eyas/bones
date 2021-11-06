@@ -16,7 +16,7 @@ const calendar = new Calendar(oldest, today);
 
 const forecastMap = new Map<string, DayData>(bones.allTime.map(d => [d.date.asIsoString(), d] as const));
 ---
-<BaseLayout title={title}>
+<BaseLayout title={title} description="'Bones or No Bones' forecast calendar. Find the forecast on a given date!">
     <nav><a href="/">Back to home</a>.</nav>
     <main>
         <h1>Calendar</h1>

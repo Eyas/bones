@@ -18,7 +18,7 @@ const {forecast} = Astro.props;
 
 --- 
 
-<BaseLayout title={`Forecast for ${forecast.date.asIsoString()}`}>
+<BaseLayout title={`Forecast for ${forecast.date.asIsoString()}`} description={`Was it a Bones Day on ${forecast.date.asCommonString()} ${forecast.date.y}? ${forecast.forecast == 1 ? "Nope..." : forecast.forecast == 3 ? "Yes!" : "It's complicated..."}`}>
     <nav><a href="/">Back to home</a>.</nav>
     <main>
         <h1>Forecast for {forecast.date.asIsoString()}</h1>
