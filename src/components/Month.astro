@@ -21,15 +21,15 @@ const days = Array(MAX_ROWS_IN_MONTH * 7).fill(undefined).map((_, i) => {
 
     const forecast = forecasts.get(day.asIsoString());
     if (!forecast) {
-        return [day.d, ''] as const;
+        return [day, ''] as const;
     }
 
     if (forecast.forecast === BonesDayType.BONES) {
-        return [day.d, '🦴'] as const;
+        return [day, '🦴'] as const;
     } else if (forecast.forecast === BonesDayType.INDETERMINATE) {
-        return [day.d, '❔'] as const;
+        return [day, '❔'] as const;
     } else {
-        return [day.d, '🚫'] as const;
+        return [day, '🚫'] as const;
     }
 });
 
@@ -51,7 +51,9 @@ const weeks = paginate(days, 7);
                     if (day === 'EMPTY') {
                         return <td></td>;
                     } else {
-                        return <td>{day[0]}<span class='verdict'>{day[1] || '&nbsp;'}</span></td>;
+                        const [date, label] = day;
+                        if (!label) return <td class='no-verdict'>{date.d}</td>;
+                        return <td><a href={`/forecast/${date.asIsoString()}`}>{date.d}<span class='verdict'>{label}</span></a></td>;
                     }
                 })
             }</tr>)
@@ -68,10 +70,27 @@ span.verdict {
 
 table td {
     background-color: #eee;
-    padding: 2px;
+    padding: 0;
     text-align: center;
     height: 3em;
     width: 3em;
+}
+
+table td.no-verdict {
+    padding: 8px;
+    vertical-align: top;
+}
+
+table td a {
+    display: block;
+    height: 100%;
+    width: 100%;
+    padding: 8px;
+    text-decoration: none;
+}
+
+table td a:hover {
+    background-color: #ddd;
 }
 
 @media screen and (max-width: 40rem) {
@@ -86,6 +105,10 @@ table td {
 @media (prefers-color-scheme: dark) {
     table td {
         background-color: #222;
+    }
+
+    table td a:hover {
+        background-color: #333;
     }
 }
 

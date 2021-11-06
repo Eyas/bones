@@ -1,0 +1,27 @@
+---
+import {bones} from '../../data/bones.js'
+import BaseLayout from '../../layouts/base.astro'
+import BoneDay from '../../components/BoneDay.astro'
+
+export async function getStaticPaths() {
+    return bones.allTime.map(forecast => ({
+        params: {
+            date: forecast.date.asIsoString(),
+        },
+        props: {
+            forecast,
+        }
+    }));
+}
+
+const {forecast} = Astro.props;
+
+--- 
+
+<BaseLayout title={`Forecast for ${forecast.date.asIsoString()}`}>
+    <nav><a href="/">Back to home</a>.</nav>
+    <main>
+        <h1>Forecast for {forecast.date.asIsoString()}</h1>
+        <BoneDay day={forecast} />
+    </main>
+</BaseLayout>
