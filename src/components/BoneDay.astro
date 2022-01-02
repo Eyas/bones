@@ -5,6 +5,26 @@ import {tiktokId} from '../lib/bone-utils.ts'
 const { day: day_ } = Astro.props;
 const day = day_ as DayData;
 const id = tiktokId(day);
+
+const affiliate = {
+    [BonesDayType.NO_BONES]: [
+        'placement=B09JN3WNNW&asins=B09JN3WNNW&linkId=4302b732e2503c1d74918803c02296b1',
+        'placement=B09KPH6QJB&asins=B09KPH6QJB&linkId=cff7decb6b7f0b2019befc442edf4cba',
+        'placement=B09LD9W6KG&asins=B09LD9W6KG&linkId=e21fb3395b372d668e2488e13e2329e3',
+    ],
+    [BonesDayType.BONES]: [
+        'placement=B09JYL3YGP&asins=B09JYL3YGP&linkId=db9e3efe464332bf826e5b0bf53f8746',
+        'placement=B09LTBH23T&asins=B09LTBH23T&linkId=988db01e318a112bc0af3bc70200ea6e',
+        'placement=B09KFLXN5Y&asins=B09KFLXN5Y&linkId=3b04f3399122d0a44c45e543c37cc5fc',
+    ]
+};
+
+function r<T extends unknown>(items: T[] | undefined) {
+    if (!items) return undefined;
+    return items[Math.floor(Math.random()*items.length)]
+}
+const aLink = r(affiliate[day.forecast]);
+
 ---
 <section>
     <header>
@@ -21,6 +41,9 @@ const id = tiktokId(day);
         {day.closestDeterminateForecast === BonesDayType.BONES ? "... but it's probably a bones day" : "... but it's likely not a bones day"}
     </div>}
     {id && <iframe src={`https://www.tiktok.com/embed/v2/${id}?lang=en-US`}></iframe>}
+    {aLink && <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src={
+        `//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=US&source=ss&ref=as_ss_li_til&ad_type=product_link&tracking_id=eyassh-20&language=en_US&marketplace=amazon&region=US&${aLink}&show_border=true&link_opens_in_new_window=true`
+        }></iframe>}
 </section>
 
 <style>
