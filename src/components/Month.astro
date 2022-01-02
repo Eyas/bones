@@ -1,7 +1,7 @@
 ---
-import {DayData, BonesDayType} from '../lib/bones.js';
-import {Month} from '../lib/calendar.js';
-import {paginate} from '../lib/paginate.js';
+import {DayData, BonesDayType} from '../lib/bones.ts';
+import {Month} from '../lib/calendar.ts';
+import {paginate} from '../lib/paginate.ts';
 
 const { month: month_, forecasts: forecasts_, class: className } = Astro.props;
 const month = month_ as Month;
@@ -53,7 +53,7 @@ const weeks = paginate(days, 7);
                     } else {
                         const [date, label] = day;
                         if (!label) return <td class='no-verdict'>{date.d}</td>;
-                        return <td><a href={`/forecast/${date.asIsoString()}`}>{date.d}<span class='verdict'>{label}</span></a></td>;
+                        return <td class='v'><a href={`/forecast/${date.asIsoString()}`}>{date.d}<span class='verdict'>{label}</span></a></td>;
                     }
                 })
             }</tr>)
@@ -69,11 +69,15 @@ span.verdict {
 }
 
 table td {
-    background-color: #eee;
+    background-color: #f6f6f6;
     padding: 0;
     text-align: center;
     height: 3em;
     width: 3em;
+}
+
+table td.v {
+    background-color: #eee;
 }
 
 table td.no-verdict {

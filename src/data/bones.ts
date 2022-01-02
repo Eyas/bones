@@ -14,6 +14,182 @@ export type Data = {
 
 const allTime: DayData[] = a(
   {
+    date: new CivilDate(2022, 1, 1),
+    forecast: BonesDayType.BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7048271702387739910",
+  },
+  {
+    date: new CivilDate(2021, 12, 31),
+    forecast: BonesDayType.NO_BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7047890544210496773",
+  },
+  {
+    date: new CivilDate(2021, 12, 28),
+    forecast: BonesDayType.NO_BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7046779675493895430",
+  },
+  {
+    date: new CivilDate(2021, 12, 25),
+    forecast: BonesDayType.BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7045657418432285957",
+  },
+  {
+    date: new CivilDate(2021, 12, 21),
+    forecast: BonesDayType.BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7044174342799789318",
+  },
+  {
+    date: new CivilDate(2021, 12, 20),
+    forecast: BonesDayType.NO_BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7043809322018557189",
+  },
+  {
+    date: new CivilDate(2021, 12, 18),
+    forecast: BonesDayType.BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7043061913114119429",
+  },
+  {
+    date: new CivilDate(2021, 12, 16),
+    forecast: BonesDayType.INDETERMINATE,
+    closestDeterminateForecast: BonesDayType.BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7042308571643514118",
+  },
+  {
+    date: new CivilDate(2021, 12, 15),
+    forecast: BonesDayType.BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7041944285268184325",
+  },
+  {
+    date: new CivilDate(2021, 12, 13),
+    forecast: BonesDayType.NO_BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7041221365935934725",
+  },
+  {
+    date: new CivilDate(2021, 12, 12),
+    forecast: BonesDayType.NO_BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7040833887395712261",
+  },
+  {
+    date: new CivilDate(2021, 12, 10),
+    forecast: BonesDayType.BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7040088885635894533",
+  },
+  {
+    date: new CivilDate(2021, 12, 9),
+    forecast: BonesDayType.BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7039717595007683845",
+  },
+  {
+    date: new CivilDate(2021, 12, 8),
+    forecast: BonesDayType.NO_BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7039331413455490350",
+  },
+  {
+    date: new CivilDate(2021, 12, 6),
+    forecast: BonesDayType.NO_BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7038604400016837893",
+  },
+  {
+    date: new CivilDate(2021, 12, 4),
+    forecast: BonesDayType.NO_BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7037869076139543813",
+  },
+  {
+    date: new CivilDate(2021, 12, 3),
+    forecast: BonesDayType.BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7037487216548924678",
+  },
+  {
+    date: new CivilDate(2021, 12, 2),
+    forecast: BonesDayType.BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7037119231531470086",
+  },
+  {
+    date: new CivilDate(2021, 11, 30),
+    forecast: BonesDayType.NO_BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7036373611187277061",
+  },
+  {
+    date: new CivilDate(2021, 11, 29),
+    forecast: BonesDayType.NO_BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7036002855471418629",
+  },
+  {
+    date: new CivilDate(2021, 11, 27),
+    forecast: BonesDayType.NO_BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7035264187450412293",
+  },
+  {
+    date: new CivilDate(2021, 11, 25),
+    forecast: BonesDayType.BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7034536859455819013",
+  },
+  {
+    date: new CivilDate(2021, 11, 24),
+    forecast: BonesDayType.BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7034153718278933765",
+  },
+  {
+    date: new CivilDate(2021, 11, 23),
+    forecast: BonesDayType.NO_BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7033774353791601926",
+  },
+  {
+    date: new CivilDate(2021, 11, 22),
+    forecast: BonesDayType.BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7033413331775950085",
+  },
+  {
+    date: new CivilDate(2021, 11, 21),
+    forecast: BonesDayType.BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7033034538523610373",
+  },
+  {
+    date: new CivilDate(2021, 11, 19),
+    forecast: BonesDayType.NO_BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7032301423278738694",
+  },
+  {
+    date: new CivilDate(2021, 11, 18),
+    forecast: BonesDayType.BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7031918628782017798",
+  },
+  {
+    date: new CivilDate(2021, 11, 16),
+    forecast: BonesDayType.BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7031187804289912069",
+  },
+  {
+    date: new CivilDate(2021, 11, 15),
+    forecast: BonesDayType.BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7030808551417236741",
+  },
+  {
+    date: new CivilDate(2021, 11, 12),
+    forecast: BonesDayType.NO_BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7029702975224417541",
+  },
+  {
+    date: new CivilDate(2021, 11, 11),
+    forecast: BonesDayType.NO_BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7029337289553693958",
+  },
+  {
+    date: new CivilDate(2021, 11, 9),
+    forecast: BonesDayType.BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7028597285869128966",
+  },
+  {
+    date: new CivilDate(2021, 11, 8),
+    forecast: BonesDayType.BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7028212495621934342",
+  },
+  {
+    date: new CivilDate(2021, 11, 7),
+    forecast: BonesDayType.NO_BONES,
+    cite: "https://www.tiktok.com/@jongraz/video/7027831943009930502",
+  },
+  {
     date: new CivilDate(2021, 11, 5),
     forecast: BonesDayType.BONES,
     cite: "https://www.tiktok.com/@jongraz/video/7027092093080325382",
